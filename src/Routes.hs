@@ -21,19 +21,20 @@ mkYesodData "App" [parseRoutes|
 /reset        ResetR   GET POST
 
 -- Admin
-/organizer/signup                                        OrganizerSignupR GET POST
-/conferences                                             ConferencesR GET
-/conference/#ConferenceId                                ConferenceDashboardR GET
-/conference/#ConferenceId/cfp/open                       ConferenceCfpOpenR POST
-/conference/#ConferenceId/cfp/close                      ConferenceCfpCloseR POST
-/conference/#ConferenceId/abstract-types                 ConferenceAbstractTypesR GET POST
-/conference/#ConferenceId/cfp                            ConferenceCallForProposalsR GET
-/conference/#ConferenceId/cfp/blocklisted                ConferenceBlockedProposalsR GET
-/conference/#ConferenceId/abstract/#AbstractId           ConferenceAbstractR GET POST
-/conference/#ConferenceId/abstract/#AbstractId/block     ConferenceBlockAbstractR POST
-/conference/#ConferenceId/abstract/#AbstractId/unblock   ConferenceUnblockAbstractR POST
-/conference/#ConferenceId/surrogate/abstract             ConferenceSurrogateAbstractR GET POST
-/user/search/#Text                                       UserSearchR GET
+/organizer/signup                                              OrganizerSignupR GET POST
+/conferences                                                   ConferencesR GET
+/conference/#ConferenceId                                      ConferenceDashboardR GET
+/conference/#ConferenceId/cfp/open                             ConferenceCfpOpenR POST
+/conference/#ConferenceId/cfp/close                            ConferenceCfpCloseR POST
+/conference/#ConferenceId/abstract-types                       ConferenceAbstractTypesR GET POST
+/conference/#ConferenceId/abstract-type/#AbstractTypeId/delete ConferenceDeleteAbstractTypeR POST
+/conference/#ConferenceId/cfp                                  ConferenceCallForProposalsR GET
+/conference/#ConferenceId/cfp/blocklisted                      ConferenceBlockedProposalsR GET
+/conference/#ConferenceId/abstract/#AbstractId                 ConferenceAbstractR GET POST
+/conference/#ConferenceId/abstract/#AbstractId/block           ConferenceBlockAbstractR POST
+/conference/#ConferenceId/abstract/#AbstractId/unblock         ConferenceUnblockAbstractR POST
+/conference/#ConferenceId/surrogate/abstract                   ConferenceSurrogateAbstractR GET POST
+/user/search/#Text                                             UserSearchR GET
 
 -- CFP submission
 /conference/#ConferenceId/cfp/submit                     SubmitAbstractR GET POST

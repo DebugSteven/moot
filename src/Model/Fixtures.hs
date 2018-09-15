@@ -312,7 +312,7 @@ truncateAllTables = do
         [st|TRUNCATE TABLE #{intercalate ", " escapedTables} RESTART IDENTITY CASCADE|]
   case escapedTables of
     [] ->
-      error "List of tables is empty, something has gone wrong!"
+      putStrLn "List of tables is empty, something may have gone wrong."
     _ -> rawExecute query []
 
 runMigrationsUnsafe :: DB ()

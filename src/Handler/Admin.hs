@@ -5,6 +5,7 @@ import Import
 import Colonnade hiding (fromMaybe)
 import qualified Data.Aeson as A
 import qualified Data.Map as M
+import qualified Database.Persist as P
 import Yesod.Colonnade
 import qualified Yesod.Paginator as Page
 
@@ -83,7 +84,11 @@ renderConferenceAbstractTypes conf@(Entity conferenceId _)
     $else
       <ul>
         $forall abstractType <- abstractTypes
-          <li>#{renderAbstractType (entityVal abstractType)}
+          <li>
+            #{renderAbstractType (entityVal abstractType)}
+            <form method="POST" action=@{ConferenceDeleteAbstractTypeR conferenceId (entityKey abstractType)}>
+              <input .button type="submit" value="Delete">
+      <ul>
     |]
 
 getConferenceAbstractTypesR :: ConferenceId -> Handler Html
@@ -108,6 +113,13 @@ postConferenceAbstractTypesR conferenceId = do
         getAbstractTypes (entityKey conference)
       renderConferenceAbstractTypes conference abstractTypes abstractTypeFormWidget
     _ -> error "bluhhh"
+
+postConferenceDeleteAbstractTypeR :: ConferenceId -> AbstractTypeId -> Handler Html
+postConferenceDeleteAbstractTypeR conferenceId abstractTypeId = do
+  (_, conference) <- 
+    requireAdminForConference conferenceId 
+  runDB $ P.delete abstractTypeId
+  redirect $ ConferenceAbstractTypesR conferenceId
 
 renderConferencesCallout :: [Entity Conference] -> Text -> Widget
 renderConferencesCallout [] _ = return ()
